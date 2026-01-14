@@ -32,6 +32,17 @@ jobs:
       - name: Test
         run: npm test
 
+      # 6) Upload build artifacts (no registry)
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            cjs
+            esm
+            umd
+            types
+
   # publish-package:
   #   needs: build-test
   #   runs-on: ubuntu-latest
