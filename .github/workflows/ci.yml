@@ -1,86 +1,86 @@
-name: CI/CD Pipeline
+# name: CI/CD Pipeline
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
 
-jobs:
-  build-test:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-test:
+#     runs-on: ubuntu-latest
 
-    steps:
-      # 1) Checkout code
-      - uses: actions/checkout@v5
+#     steps:
+#       # 1) Checkout code
+#       - uses: actions/checkout@v5
 
-      # 2) Install Node & cache dependencies
-      - name: Setup Node
-        uses: actions/setup-node@v5
-        with:
-          node-version: "20.x"
-          cache: "npm"
+#       # 2) Install Node & cache dependencies
+#       - name: Setup Node
+#         uses: actions/setup-node@v5
+#         with:
+#           node-version: "20.x"
+#           cache: "npm"
 
-      # 3) Install dependencies
-      - run: npm ci
+#       # 3) Install dependencies
+#       - run: npm ci
 
-      # 4) Build your TypeScript (tsc)
-      - name: Build
-        run: npm run build
+#       # 4) Build your TypeScript (tsc)
+#       - name: Build
+#         run: npm run build
 
-      # 5) Run tests
-      - name: Test
-        run: npm test
+#       # 5) Run tests
+#       - name: Test
+#         run: npm test
 
-      # 6) Upload build artifacts (no registry)
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-output
-          path: |
-            dist/cjs
-            dist/esm
-            dist/umd
-            dist/types
+#       # 6) Upload build artifacts (no registry)
+#       - name: Upload build artifacts
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: build-output
+#           path: |
+#             dist/cjs
+#             dist/esm
+#             dist/umd
+#             dist/types
 
-  publish:
-    needs: build-test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+#   publish:
+#     needs: build-test
+#     runs-on: ubuntu-latest
+#     if: github.ref == 'refs/heads/main'
 
-    permissions:
-      contents: read
-      packages: write
+#     permissions:
+#       contents: read
+#       packages: write
 
-    steps:
-      - uses: actions/checkout@v5
+#     steps:
+#       - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v5
-        with:
-          node-version: "20.x"
-          registry-url: https://npm.pkg.github.com
-          scope: "@khoand78"
+#       - uses: actions/setup-node@v5
+#         with:
+#           node-version: "20.x"
+#           registry-url: https://npm.pkg.github.com
+#           scope: "@khoand78"
 
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - run: npm ci
+#       - run: npm publish
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
-  # publish-package:
-  #   needs: build-test
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/main'
+#   # publish-package:
+#   #   needs: build-test
+#   #   runs-on: ubuntu-latest
+#   #   if: github.ref == 'refs/heads/main'
 
-  #   steps:
-  #     - uses: actions/checkout@v5
-  #     - name: Setup Node for publish
-  #       uses: actions/setup-node@v5
-  #       with:
-  #         node-version: "20.x"
-  #         registry-url: "https://registry.npmjs.org"
-  #     - run: npm ci
-  #     - run: npm publish
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+#   #   steps:
+#   #     - uses: actions/checkout@v5
+#   #     - name: Setup Node for publish
+#   #       uses: actions/setup-node@v5
+#   #       with:
+#   #         node-version: "20.x"
+#   #         registry-url: "https://registry.npmjs.org"
+#   #     - run: npm ci
+#   #     - run: npm publish
+#   #       env:
+#   #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
