@@ -9,6 +9,7 @@ module.exports = {
     library: 'exampleTypescriptPackage',
     libraryTarget: 'umd',
     globalObject: 'this',
+    hashFunction: "xxhash64"
   },
   module: {
     rules: [
