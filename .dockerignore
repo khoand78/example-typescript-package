@@ -1,6 +1,9 @@
 node_modules
 .git
 .github
-src
-tests
+dist
+cjs
+esm
+umd
+types
 *.log
