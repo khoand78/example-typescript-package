@@ -1,5 +1,5 @@
 {
-  "name": "example-typescript-package",
+  "name": "@khoand78/example-typescript-package",
   "version": "0.2.2",
   "description": "",
   "main": "dist/cjs/index.js",
@@ -19,13 +19,18 @@
     "package": "npm run build && npm pack",
     "test": "jest --no-cache --runInBand",
     "test:cov": "jest --coverage --no-cache --runInBand",
-    "addscope": "node tools/packagejson name @tomchen/example-typescript-package"
+    "addscope": "node tools/packagejson name @khoand78/example-typescript-package"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
   },
   "files": [
-    "dist"
+    "dist",
+    "cjs",
+    "esm",
+    "umd",
+    "types"
   ],
   "keywords": [
     "example",
@@ -40,15 +45,15 @@
     "esm",
     "umd"
   ],
-  "author": "Tom Chen <tomchen.org@gmail.com>",
+  "author": "Khoa D. Nguyen <khoad.nguyen78@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/tomchen/example-typescript-package",
+  "homepage": "https://github.com/khoand78/example-typescript-package",
   "repository": {
     "type": "git",
-    "url": "git@github.com:tomchen/example-typescript-package.git"
+    "url": "git@github.com:khoand78/example-typescript-package.git"
   },
   "bugs": {
-    "url": "https://github.com/tomchen/example-typescript-package/issues"
+    "url": "https://github.com/khoand78/example-typescript-package/issues"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
